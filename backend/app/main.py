@@ -314,30 +314,6 @@ async def scan_folders(db: Session = Depends(get_db)):
 # PREFLIGHT ENDPOINTS
 # ============================================================================
 
-@app.post("/api/preflight/{folder_id}", response_model=PreflightResponse)
-async def run_preflight_check(folder_id: int, db: Session = Depends(get_db)):
-    """Run preflight check on a specific folder."""
-    try:
-        # Get folder info
-        folder = db.query(FolderStatus).filter(FolderStatus.id == folder_id).first()
-
-        if not folder:
-            raise HTTPException(status_code=404, detail="Folder not found")
-
-        # Update status to processing
-        folder.status = "processing"
-        folder.updated_at = datetime.utcnow()
-        db.commit()
-
-        # Run preflight
-        result = preflight_runner.run_preflight(folder.folder_path, db)
-
-        return result
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @app.post("/api/preflight/manual", response_model=PreflightResponse)
 async def manual_preflight(
     file: UploadFile = File(...),
@@ -387,6 +363,30 @@ async def manual_preflight(
             result = preflight_runner.run_preflight(str(temp_path), db)
 
             return result
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/preflight/{folder_id}", response_model=PreflightResponse)
+async def run_preflight_check(folder_id: int, db: Session = Depends(get_db)):
+    """Run preflight check on a specific folder."""
+    try:
+        # Get folder info
+        folder = db.query(FolderStatus).filter(FolderStatus.id == folder_id).first()
+
+        if not folder:
+            raise HTTPException(status_code=404, detail="Folder not found")
+
+        # Update status to processing
+        folder.status = "processing"
+        folder.updated_at = datetime.utcnow()
+        db.commit()
+
+        # Run preflight
+        result = preflight_runner.run_preflight(folder.folder_path, db)
+
+        return result
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
