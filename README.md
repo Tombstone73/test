@@ -64,6 +64,36 @@ A comprehensive web application for managing print shop preflight operations. Bu
 - Node.js 18+ and npm
 - Git
 
+### Automatic Startup (Recommended)
+
+The easiest way to start both the backend and frontend together:
+
+```bash
+./start.sh
+```
+
+This single script will:
+- ✓ Start the backend server on http://localhost:8000
+- ✓ Start the frontend dev server on http://localhost:3000
+- ✓ Display live logs from both services
+- ✓ Handle graceful shutdown with Ctrl+C
+
+Logs are saved to `.logs/backend.log` and `.logs/frontend.log`
+
+### Manual Setup
+
+If you prefer to start services individually, you can use the following scripts:
+
+**Start Backend:**
+```bash
+./start-backend.sh
+```
+
+**Start Frontend (in a separate terminal):**
+```bash
+./start-frontend.sh
+```
+
 ### Backend Setup
 
 1. Install Python dependencies:

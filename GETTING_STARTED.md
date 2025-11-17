@@ -10,30 +10,38 @@ A complete web application for managing your print shop preflight operations. Th
 
 ## First Steps
 
-### 1. Start the Backend (Terminal 1)
+### Quick Start (One Command)
 
+The easiest way to start everything:
+
+```bash
+./start.sh
+```
+
+This single command will:
+- ✓ Start the backend server (http://localhost:8000)
+- ✓ Start the frontend dev server (http://localhost:3000)
+- ✓ Show live logs from both services
+- ✓ Handle graceful shutdown with Ctrl+C
+
+**Alternative: Start Services Individually**
+
+If you prefer separate terminals:
+
+**Terminal 1 - Backend:**
 ```bash
 ./start-backend.sh
 ```
 
-This will:
-- Create a Python virtual environment
-- Install all dependencies
-- Start the FastAPI server on http://localhost:8000
-
-Visit http://localhost:8000/docs to explore the API documentation.
-
-### 2. Start the Frontend (Terminal 2)
-
+**Terminal 2 - Frontend:**
 ```bash
 ./start-frontend.sh
 ```
 
-This will:
-- Install Node.js dependencies
-- Start the React development server on http://localhost:3000
-
-Visit http://localhost:3000 to use the application.
+Once running:
+- Frontend UI: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
 
 ## Initial Configuration
 
