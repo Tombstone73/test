@@ -1,6 +1,6 @@
 """FastAPI main application."""
 
-from fastapi import FastAPI, HTTPException, Depends, UploadFile, File
+from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -341,9 +341,9 @@ async def run_preflight_check(folder_id: int, db: Session = Depends(get_db)):
 @app.post("/api/preflight/manual", response_model=PreflightResponse)
 async def manual_preflight(
     file: UploadFile = File(...),
-    expected_width: Optional[float] = None,
-    expected_height: Optional[float] = None,
-    product_type: Optional[str] = None,
+    expected_width: Optional[float] = Form(None),
+    expected_height: Optional[float] = Form(None),
+    product_type: Optional[str] = Form(None),
     db: Session = Depends(get_db)
 ):
     """Run manual preflight check on uploaded PDF."""
