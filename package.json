@@ -1,0 +1,32 @@
+{
+  "name": "preflight-management-app",
+  "version": "1.0.0",
+  "description": "Preflight Management System - Full Stack Application",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/killPorts.js",
+    "dev": "concurrently --kill-others-on-fail --prefix-colors \"blue,green\" --names \"BACKEND,FRONTEND\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "stop": "node scripts/killPorts.js",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && python -m venv venv && . venv/bin/activate && pip install -r requirements.txt",
+    "build": "cd frontend && npm run build",
+    "clean": "node scripts/killPorts.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "preflight",
+    "print-shop",
+    "quality-control"
+  ],
+  "author": "",
+  "license": "ISC"
+}
