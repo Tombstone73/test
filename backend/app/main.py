@@ -45,8 +45,8 @@ app.add_middleware(
 async def startup_event():
     """Initialize database on startup."""
     init_db()
-    print("✓ Database initialized")
-    print(f"✓ Settings file: {settings_manager.settings_file}")
+    print("[OK] Database initialized")
+    print(f"[OK] Settings file: {settings_manager.settings_file}")
 
 
 # ============================================================================
